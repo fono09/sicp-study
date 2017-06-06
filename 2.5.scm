@@ -1,0 +1,11 @@
+(define (cons a b)
+  (* (expt 2 a) (expt 3 b)))
+(define (car z)
+  (define (rec x p)
+    (if (= 0 (modulo x 2)) (rec (/ x 2) (+ p 1)) p))
+  (rec z 0))
+
+(define (cdr z)
+  (define (rec x p)
+    (if (= 0 (modulo x 3)) (rec (/ x 3) (+ p 1)) p))
+  (rec z 0))
