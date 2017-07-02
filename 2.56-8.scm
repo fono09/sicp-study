@@ -38,7 +38,7 @@
 (define (make-product m1 m2) (list '* m1 m2))
 
 (define (sum? x)
-  (and (pair? x) (eq? (car x) 'x)))
+  (and (pair? x) (eq? (car x) '+)))
 (define (addend s) (cadr s))
 
 (define (product? x)
