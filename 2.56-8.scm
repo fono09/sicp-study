@@ -96,5 +96,25 @@
       (error "unknown expression type -- DERIV" exp))))
 
 ; 2.57
+(define (make-sum a1 . a2)
+  (let 
+    ((a3 (list '+
+	      (fold + 0 (filter number? a2)) 
+	      (filter variable? a2))))
+    ((cond ((=number? a1 0) a3)
+           ((=number? a3 0) a1)
+           ((and (number? a1) (number? a3)) (+ a1 a3))
+	   (else (list '+ a1 a3))))))
 
-
+(define (make-product m1 . m2)
+  (let 
+    ((m3 (if (member 0 m2) 0 
+	     (list '*
+		   (fold * 1 (filter number? m2))
+		   (let ((m4 (filter variable? m2)))
+		        ((if (pair? m4) m4 (car m4))))))))
+    ((cond ((or (=number? m1 0) (=number? m3 0)) 0)
+	   ((=number? m1 1) m3)
+	   ((=number? m3 1) m1)
+	   ((and (number? m1) (number? m3)) (* m1 m3))
+	   (else (list '* m1 m3))))))
