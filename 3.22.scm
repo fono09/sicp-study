@@ -1,0 +1,21 @@
+(define (make-queue)
+  (let ((front-ptr '())
+        (rear-ptr '()))
+     (define (set-rear-ptr! ptr) (set! rear-ptr ptr))
+     (define (set-front-ptr! ptr) (set! front-ptr ptr))
+     (define (dispatch m)
+       (cond 
+         ((eq? m 'front-ptr) front-ptr)
+         ((eq? m 'rear-ptr) rear-ptr)
+         ((eq? m 'set-front-ptr!) set-front-ptr)
+         ((eq? m 'set-rear-ptr!) set-rear-ptr)
+         ((eq? m 'front-queue) (car front-ptr))
+         ((eq? m 'rear-queue) (car rear-ptr))
+         ((eq? m 'insert-queue!) ((set-cdr! rear-ptr)
+         (else (error "Undefined Opration -- queue:" m))))
+     dispatch))
+
+(define (front-ptr z) (z 'front-ptr))
+(define (rear-ptr z) (z 'rear-ptr))
+(define (set-front-ptr z) (z 'set-front-ptr))
+(define (set-
