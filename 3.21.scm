@@ -26,12 +26,13 @@
           queue))) 
 
 (define (print-queue queue)
-  (print-queue-iter (car queue)))
+  (print-queue-iter (front-ptr queue) (rear-ptr queue)))
+
+(define (print-queue-iter fptr rptr)
+  (print (car fptr))
+  (if (eq? fptr rptr) #t
+  (print-queue-iter (cdr fptr) rptr)))
  
-(define (print-queue-iter current-ptr)
-  (if (pair? current-ptr)
-    ((print (car current-ptr))
-     (print-queue-iter (cdr current-ptr)))))
     
 (define q1 (make-queue))
 (insert-queue! q1 'a)
@@ -39,3 +40,4 @@
 (insert-queue! q1 'c)
 (insert-queue! q1 'd)
 (insert-queue! q1 'e)
+(delete-queue! q1)
